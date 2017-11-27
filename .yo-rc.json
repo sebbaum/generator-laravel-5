@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Sebastian Baum",
+      "authorEmail": "seb.baum@googlemail.com",
+      "authorUrl": "http://www.sebbaum.de"
+    }
+  }
+}
