@@ -58,6 +58,15 @@ module.exports = class extends Generator {
     );
   }
 
+  installLaravelPackages() {
+    this.spawnCommandSync('composer', [
+      'require',
+      '--dev',
+      'barryvdh/laravel-ide-helper',
+      'barryvdh/laravel-debugbar'
+    ]);
+  }
+
   removeFiles() {
     fs.unlink('webpack.mix.js');
     fs.unlink('package.json');
