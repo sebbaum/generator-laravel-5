@@ -62,6 +62,7 @@ module.exports = class extends Generator {
     this.spawnCommandSync('composer', [
       'require',
       '--dev',
+      'doctrine/dbal',
       'barryvdh/laravel-ide-helper',
       'barryvdh/laravel-debugbar'
     ]);
