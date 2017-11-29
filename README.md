@@ -20,7 +20,6 @@ yo laravel-5
 * Unittesting
 * Making the application path dynamic/customizable
 * Choose between different Laravel presets
-* Choose different Laravel packages to install.
 
 ## License
 
