@@ -28,6 +28,13 @@ module.exports = class extends Generator {
         message: 'Which schema do you want to use?',
         choices: ['http', 'https'],
         default: 'https'
+      },
+      {
+        type: 'list',
+        name: 'preset',
+        message: 'Which laravel frontend preset do you want to use?',
+        choices: ['none', 'bootstrap', 'vue', 'react'],
+        default: 'none'
       }
     ];
 
@@ -91,6 +98,7 @@ module.exports = class extends Generator {
   }
 
   install() {
+    this.spawnCommandSync('php', ['artisan', 'preset', this.answers.preset]);
     this.npmInstall(['browser-sync', 'browser-sync-webpack-plugin'], {
       'save-dev': true
     });
@@ -99,5 +107,9 @@ module.exports = class extends Generator {
       bower: false,
       yarn: false
     });
+  }
+
+  end() {
+    this.spawnCommandSync('npm', ['run', 'dev']);
   }
 };
