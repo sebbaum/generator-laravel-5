@@ -110,6 +110,8 @@ module.exports = class extends Generator {
   }
 
   end() {
-    this.spawnCommandSync('npm', ['run', 'dev']);
+    if (this.answers.preset !== 'none') {
+      this.spawnCommandSync('npm', ['run', 'dev']);
+    }
   }
 };
