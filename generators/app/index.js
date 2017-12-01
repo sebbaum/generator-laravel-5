@@ -1,26 +1,18 @@
 'use strict';
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
-const _ = require('lodash');
 const fs = require('fs');
-const path = require('path');
 
 module.exports = class extends Generator {
   prompting() {
     this.log("Let's create a new " + chalk.blue('Laravel 5') + ' application');
 
-    let noApps = ['default', '.well-known'];
-    let apps = fs.readdirSync('/var/www/');
-    _.remove(apps, app => {
-      return _.includes(noApps, app);
-    });
-
     const questions = [
       {
-        type: 'list',
-        name: 'app',
-        message: 'Choose your app directory.',
-        choices: apps
+        type: 'input',
+        name: 'appname',
+        message: "What's the name of your application?",
+        default: 'application'
       },
       {
         type: 'list',
@@ -44,25 +36,17 @@ module.exports = class extends Generator {
     });
   }
 
-  setDestinationFolder() {
-    this.destinationRoot(
-      this.destinationPath(path.join('/var', 'www', this.answers.app))
-    );
-  }
-
   installLaravel() {
     this.spawnCommandSync('composer', [
       'create-project',
       '--prefer-dist',
       'laravel/laravel',
-      'application'
+      this.answers.appname
     ]);
   }
 
   setApplicationFolder() {
-    this.destinationRoot(
-      this.destinationPath(path.join('/var', 'www', this.answers.app, 'application'))
-    );
+    this.destinationRoot(this.destinationPath(this.answers.appname));
   }
 
   installLaravelPackages() {
