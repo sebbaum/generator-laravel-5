@@ -1,26 +1,18 @@
 'use strict';
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
-const _ = require('lodash');
 const fs = require('fs');
-const path = require('path');
 
 module.exports = class extends Generator {
   prompting() {
     this.log("Let's create a new " + chalk.blue('Laravel 5') + ' application');
 
-    let noApps = ['default', '.well-known'];
-    let apps = fs.readdirSync('/var/www/');
-    _.remove(apps, app => {
-      return _.includes(noApps, app);
-    });
-
     const questions = [
       {
-        type: 'list',
-        name: 'app',
-        message: 'Choose your app directory.',
-        choices: apps
+        type: 'input',
+        name: 'appname',
+        message: "What's the name of your application?",
+        default: 'application'
       },
       {
         type: 'list',
@@ -28,6 +20,13 @@ module.exports = class extends Generator {
         message: 'Which schema do you want to use?',
         choices: ['http', 'https'],
         default: 'https'
+      },
+      {
+        type: 'list',
+        name: 'preset',
+        message: 'Which laravel frontend preset do you want to use?',
+        choices: ['none', 'bootstrap', 'vue', 'react'],
+        default: 'none'
       }
     ];
 
@@ -37,25 +36,27 @@ module.exports = class extends Generator {
     });
   }
 
-  setDestinationFolder() {
-    this.destinationRoot(
-      this.destinationPath(path.join('/var', 'www', this.answers.app))
-    );
-  }
-
   installLaravel() {
     this.spawnCommandSync('composer', [
       'create-project',
       '--prefer-dist',
       'laravel/laravel',
-      'application'
+      this.answers.appname
     ]);
   }
 
   setApplicationFolder() {
-    this.destinationRoot(
-      this.destinationPath(path.join('/var', 'www', this.answers.app, 'application'))
-    );
+    this.destinationRoot(this.destinationPath(this.answers.appname));
+  }
+
+  installLaravelPackages() {
+    this.spawnCommandSync('composer', [
+      'require',
+      '--dev',
+      'doctrine/dbal',
+      'barryvdh/laravel-ide-helper',
+      'barryvdh/laravel-debugbar'
+    ]);
   }
 
   removeFiles() {
@@ -81,6 +82,7 @@ module.exports = class extends Generator {
   }
 
   install() {
+    this.spawnCommandSync('php', ['artisan', 'preset', this.answers.preset]);
     this.npmInstall(['browser-sync', 'browser-sync-webpack-plugin'], {
       'save-dev': true
     });
@@ -89,5 +91,11 @@ module.exports = class extends Generator {
       bower: false,
       yarn: false
     });
+  }
+
+  end() {
+    if (this.answers.preset !== 'none') {
+      this.spawnCommandSync('npm', ['run', 'dev']);
+    }
   }
 };

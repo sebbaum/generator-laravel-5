@@ -16,12 +16,10 @@ Then generate your new project:
 yo laravel-5
 ```
 
-## Getting To Know Yeoman
-
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+## Roadmap
+* Unittesting
+* Making the application path dynamic/customizable
+* Choose between different Laravel presets
 
 ## License
 
