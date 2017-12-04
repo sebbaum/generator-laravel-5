@@ -18,8 +18,6 @@ yo laravel-5
 
 ## Roadmap
 * Unittesting
-* Making the application path dynamic/customizable
-* Choose between different Laravel presets
 
 ## License
 
