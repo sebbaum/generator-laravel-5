@@ -55,7 +55,8 @@ module.exports = class extends Generator {
       '--dev',
       'doctrine/dbal',
       'barryvdh/laravel-ide-helper',
-      'barryvdh/laravel-debugbar'
+      'barryvdh/laravel-debugbar',
+      'barryvdh/laravel-cors'
     ]);
   }
 
@@ -87,7 +88,6 @@ module.exports = class extends Generator {
       'save-dev': true
     });
     this.installDependencies({
-      npm: true,
       bower: false,
       yarn: false
     });
