@@ -16,9 +16,6 @@ Then generate your new project:
 yo laravel-5
 ```
 
-## Roadmap
-* Unittesting
-
 ## License
 
 Apache-2.0 © [Sebastian Baum](http://www.sebbaum.de)

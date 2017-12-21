@@ -1,6 +1,6 @@
 {
   "name": "generator-laravel-5",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Installs Laravel-5 and enables BrowserSync",
   "homepage": "https://github.com/sebbaum/generator-laravel-5",
   "author": {

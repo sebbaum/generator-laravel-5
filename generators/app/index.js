@@ -76,10 +76,7 @@ module.exports = class extends Generator {
       }
     );
 
-    this.fs.copyTpl(
-      this.templatePath('package.json'),
-      this.destinationPath('package.json')
-    );
+    this.fs.copy(this.templatePath('package.json'), this.destinationPath('package.json'));
   }
 
   install() {
