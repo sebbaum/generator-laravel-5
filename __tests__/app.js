@@ -14,14 +14,16 @@ describe('generator-laravel-5:app', () => {
       .on('end', done);
   }, 30000);
 
-  it('creates files', () => {
+  it('creates files', done => {
     assert.file(['webpack.mix.js', 'package.json']);
+    done();
   });
 
-  it('composer.json contains laravel packages', () => {
+  it('composer.json contains laravel packages', done => {
     assert.fileContent('composer.json', 'doctrine/dbal');
     assert.fileContent('composer.json', 'barryvdh/laravel-ide-helper');
     assert.fileContent('composer.json', 'barryvdh/laravel-debugbar');
     assert.fileContent('composer.json', 'barryvdh/laravel-cors');
+    done();
   });
 });
