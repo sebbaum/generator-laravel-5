@@ -1,4 +1,4 @@
-# generator-laravel-5 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-laravel-5 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
 > Installs Laravel-5 and enables BrowserSync
 
 ## Installation
@@ -27,5 +27,3 @@ Apache-2.0 © [Sebastian Baum](http://www.sebbaum.de)
 [travis-url]: https://travis-ci.org/sebbaum/generator-laravel-5
 [daviddm-image]: https://david-dm.org/sebbaum/generator-laravel-5.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/sebbaum/generator-laravel-5
-[coveralls-image]: https://coveralls.io/repos/sebbaum/generator-laravel-5/badge.svg
-[coveralls-url]: https://coveralls.io/r/sebbaum/generator-laravel-5

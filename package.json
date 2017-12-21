@@ -18,7 +18,6 @@
     "BrowserSync"
   ],
   "devDependencies": {
-    "coveralls": "^2.13.1",
     "eslint": "^4.12.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-xo": "^0.18.2",
