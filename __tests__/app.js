@@ -12,7 +12,7 @@ describe('generator-laravel-5:app', () => {
         preset: 'none'
       })
       .on('end', done);
-  }, 30000);
+  }, 1200000);
 
   it('creates files', done => {
     assert.file(['webpack.mix.js', 'package.json']);
