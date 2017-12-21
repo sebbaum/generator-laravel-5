@@ -1,7 +1,7 @@
 {
   "name": "generator-laravel-5",
   "version": "0.3.0",
-  "description": "Installs Laravel-5 and enables BrowserSync",
+  "description": "A yeoman generator for Laravel 5 apps where certain packages and BrowserSync are included.",
   "homepage": "https://github.com/sebbaum/generator-laravel-5",
   "author": {
     "name": "Sebastian Baum",
