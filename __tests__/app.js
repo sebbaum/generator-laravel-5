@@ -15,7 +15,7 @@ describe('generator-laravel-5:app', () => {
   }, 1200000);
 
   it('creates files', done => {
-    assert.file(['webpack.mix.js', 'package.json']);
+    assert.file(['webpack.mix.js', 'package.json', '.gitignore']);
     done();
   });
 
@@ -24,6 +24,13 @@ describe('generator-laravel-5:app', () => {
     assert.fileContent('composer.json', 'barryvdh/laravel-ide-helper');
     assert.fileContent('composer.json', 'barryvdh/laravel-debugbar');
     assert.fileContent('composer.json', 'barryvdh/laravel-cors');
+    assert.fileContent('composer.json', 'phpmetrics/phpmetrics');
+    assert.jsonFileContent('composer.json', {
+      scripts: {
+        analyze: ['phpmetrics --report-html=phpmetrics ./app']
+      }
+    });
+
     done();
   });
 });

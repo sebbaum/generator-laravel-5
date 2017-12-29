@@ -16,6 +16,22 @@ Then generate your new project:
 yo laravel-5
 ```
 
+## Integrated packages
+The following packages are integrated by default in the new Laravel project:
+* doctrine/dbal
+* barryvdh/laravel-ide-helper
+* barryvdh/laravel-debugbar
+* barryvdh/laravel-cors
+* phpmetrics/phpmetrics
+
+## Code analyzes
+In order to perform a code analyzes you can run:
+```
+composer run-script analyze
+```
+This will create a folder named `phpmetrics` and you can get interesting insights by opening
+`phpmetrics/index.html`
+
 ## License
 
 Apache-2.0 © [Sebastian Baum](http://www.sebbaum.de)

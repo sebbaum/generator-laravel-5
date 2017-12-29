@@ -56,13 +56,29 @@ module.exports = class extends Generator {
       'doctrine/dbal',
       'barryvdh/laravel-ide-helper',
       'barryvdh/laravel-debugbar',
-      'barryvdh/laravel-cors'
+      'barryvdh/laravel-cors',
+      'phpmetrics/phpmetrics'
     ]);
+  }
+
+  composerScripts() {
+    let data = fs.readFileSync('composer.json', 'utf8');
+    console.log(data);
+    let composer = JSON.parse(data);
+    composer.scripts.analyze = ['phpmetrics --report-html=phpmetrics ./app'];
+
+    fs.unlink('composer.json');
+
+    this.fs.write(
+      this.destinationPath('composer.json'),
+      JSON.stringify(composer, null, 2)
+    );
   }
 
   removeFiles() {
     fs.unlink('webpack.mix.js');
     fs.unlink('package.json');
+    fs.unlink('.gitignore');
   }
 
   templates() {
@@ -77,6 +93,7 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(this.templatePath('package.json'), this.destinationPath('package.json'));
+    this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
   }
 
   install() {
