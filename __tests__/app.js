@@ -8,6 +8,8 @@ describe('generator-laravel-5:app', () => {
     helpers
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
+        appname: 'testapp',
+        proxy: 'localhost',
         schema: 'http',
         preset: 'none'
       })
@@ -19,7 +21,7 @@ describe('generator-laravel-5:app', () => {
     done();
   });
 
-  it('composer.json contains laravel packages', done => {
+  it('composer.json contains laravel packages and script', done => {
     assert.fileContent('composer.json', 'doctrine/dbal');
     assert.fileContent('composer.json', 'barryvdh/laravel-ide-helper');
     assert.fileContent('composer.json', 'barryvdh/laravel-debugbar');

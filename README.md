@@ -16,6 +16,12 @@ Then generate your new project:
 yo laravel-5
 ```
 
+## Proxy
+You can choose from where your application is served:
+* localhost:8000 (Use this if you serve your application via `php artisan serve`)
+* localhost (Use this, if you serve your application via a webserver (local or remote))
+The proxy configuration is required for BrowserSync and can be changed in `webpack.mix.js`
+
 ## Integrated packages
 The following packages are integrated by default in the new Laravel project:
 * doctrine/dbal

@@ -16,6 +16,16 @@ module.exports = class extends Generator {
       },
       {
         type: 'list',
+        name: 'proxy',
+        message: 'From where you you serve your application during development?',
+        choices: ['localhost:8000', 'localhost'],
+        default: 1
+      },
+      {
+        when: answers => {
+          return answers.proxy === 'localhost';
+        },
+        type: 'list',
         name: 'schema',
         message: 'Which schema do you want to use?',
         choices: ['http', 'https'],
@@ -82,7 +92,8 @@ module.exports = class extends Generator {
   }
 
   templates() {
-    let proxy = this.answers.schema + '://localhost';
+    let schema = this.answers.schema || 'http';
+    let proxy = schema + '://' + this.answers.proxy;
 
     this.fs.copyTpl(
       this.templatePath('webpack.mix.js'),
