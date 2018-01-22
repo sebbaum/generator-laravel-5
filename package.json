@@ -15,7 +15,8 @@
   "keywords": [
     "yeoman-generator",
     "Laravel",
-    "BrowserSync"
+    "BrowserSync",
+    "Laravel 5"
   ],
   "devDependencies": {
     "eslint": "^4.12.1",
