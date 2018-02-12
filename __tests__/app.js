@@ -9,6 +9,7 @@ describe('generator-laravel-5:app', () => {
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         appname: 'testapp',
+        version: '5.5.*',
         proxy: 'localhost',
         schema: 'http',
         preset: 'none'

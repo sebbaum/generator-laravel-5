@@ -16,10 +16,17 @@ module.exports = class extends Generator {
       },
       {
         type: 'list',
+        name: 'version',
+        message: 'Which Laravel version do you want to use?',
+        choices: ['5.6.*', '5.5.*'],
+        default: 0
+      },
+      {
+        type: 'list',
         name: 'proxy',
         message: 'From where you you serve your application during development?',
         choices: ['localhost:8000', 'localhost'],
-        default: 1
+        default: 0
       },
       {
         when: answers => {
@@ -51,7 +58,8 @@ module.exports = class extends Generator {
       'create-project',
       '--prefer-dist',
       'laravel/laravel',
-      this.answers.appname
+      this.answers.appname,
+      this.answers.version
     ]);
   }
 
