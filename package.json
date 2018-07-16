@@ -19,25 +19,25 @@
     "Laravel 5"
   ],
   "devDependencies": {
-    "eslint": "^4.12.1",
+    "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-xo": "^0.18.2",
-    "eslint-plugin-prettier": "^2.2.0",
+    "eslint-plugin-prettier": "^2.6.2",
     "husky": "^0.14.3",
-    "jasmine": "^2.8.0",
+    "jasmine": "^2.99.0",
     "jest": "^21.0.0",
     "jest-cli": "^21.0.0",
     "lint-staged": "^4.2.1",
     "nsp": "^2.6.3",
-    "prettier": "^1.7.0",
-    "yeoman-assert": "^3.1.0",
-    "yeoman-test": "^1.7.0"
+    "prettier": "^1.13.7",
+    "yeoman-assert": "^3.1.1",
+    "yeoman-test": "^1.8.0"
   },
   "dependencies": {
-    "chalk": "^2.1.0",
-    "lodash": "^4.17.4",
-    "yeoman-generator": "^2.0.1",
-    "yosay": "^2.0.1"
+    "chalk": "^2.4.1",
+    "lodash": "^4.17.10",
+    "yeoman-generator": "^2.0.5",
+    "yosay": "^2.0.2"
   },
   "jest": {
     "testEnvironment": "node"
