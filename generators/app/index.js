@@ -75,7 +75,8 @@ module.exports = class extends Generator {
       'barryvdh/laravel-ide-helper',
       'barryvdh/laravel-debugbar',
       'barryvdh/laravel-cors',
-      'phpmetrics/phpmetrics'
+      'phpmetrics/phpmetrics',
+      'beyondcode/laravel-self-diagnosis'
     ]);
   }
 
@@ -132,5 +133,6 @@ module.exports = class extends Generator {
     }
 
     this.spawnCommandSync('php', ['artisan', 'storage:link']);
+    this.spawnCommandSync('php', ['artisan', 'self-diagnosis']);
   }
 };
