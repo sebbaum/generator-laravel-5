@@ -130,5 +130,7 @@ module.exports = class extends Generator {
     if (this.answers.preset !== 'none') {
       this.spawnCommandSync('npm', ['run', 'dev']);
     }
+
+    this.spawnCommandSync('php', ['artisan', 'storage:link']);
   }
 };
