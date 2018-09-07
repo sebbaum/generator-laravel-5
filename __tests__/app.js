@@ -28,6 +28,7 @@ describe('generator-laravel-5:app', () => {
     assert.fileContent('composer.json', 'barryvdh/laravel-debugbar');
     assert.fileContent('composer.json', 'barryvdh/laravel-cors');
     assert.fileContent('composer.json', 'phpmetrics/phpmetrics');
+    assert.fileContent('composer.json', 'beyondcode/laravel-self-diagnosis');
     assert.jsonFileContent('composer.json', {
       scripts: {
         analyze: ['phpmetrics --report-html=phpmetrics ./app']

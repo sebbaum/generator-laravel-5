@@ -18,7 +18,7 @@ module.exports = class extends Generator {
         type: 'list',
         name: 'version',
         message: 'Which Laravel version do you want to use?',
-        choices: ['5.6.*', '5.5.*'],
+        choices: ['5.7.*', '5.6.*', '5.5.*'],
         default: 0
       },
       {
@@ -75,7 +75,8 @@ module.exports = class extends Generator {
       'barryvdh/laravel-ide-helper',
       'barryvdh/laravel-debugbar',
       'barryvdh/laravel-cors',
-      'phpmetrics/phpmetrics'
+      'phpmetrics/phpmetrics',
+      'beyondcode/laravel-self-diagnosis'
     ]);
   }
 
@@ -130,5 +131,8 @@ module.exports = class extends Generator {
     if (this.answers.preset !== 'none') {
       this.spawnCommandSync('npm', ['run', 'dev']);
     }
+
+    this.spawnCommandSync('php', ['artisan', 'storage:link']);
+    this.spawnCommandSync('php', ['artisan', 'self-diagnosis']);
   }
 };
