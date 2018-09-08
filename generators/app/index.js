@@ -24,8 +24,8 @@ module.exports = class extends Generator {
       {
         type: 'list',
         name: 'proxy',
-        message: 'From where you you serve your application during development?',
-        choices: ['localhost:8000', 'localhost'],
+        message: 'From where do you serve your application during development?',
+        choices: ['php artisan serve (localhost:8080)', 'localhost'],
         default: 0
       },
       {
@@ -102,12 +102,15 @@ module.exports = class extends Generator {
 
   templates() {
     let schema = this.answers.schema || 'http';
-    let proxy = schema + '://' + this.answers.proxy;
+    let proxyHost =
+      this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8080';
+    let proxy = schema + '://' + proxyHost;
 
     this.fs.copyTpl(
-      this.templatePath('webpack.mix.js'),
+      this.templatePath('webpack.mix.ejs'),
       this.destinationPath('webpack.mix.js'),
       {
+        version: this.answers.version,
         proxy: proxy
       }
     );

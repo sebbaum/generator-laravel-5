@@ -29,6 +29,7 @@ The following packages are integrated by default in the new Laravel project:
 * barryvdh/laravel-debugbar
 * barryvdh/laravel-cors
 * phpmetrics/phpmetrics
+* beyondcode/laravel-self-diagnosis
 
 ## Code analyzes
 In order to perform a code analyzes you can run:
