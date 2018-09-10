@@ -86,7 +86,7 @@ module.exports = class extends Generator {
     let composer = JSON.parse(data);
     composer.scripts.analyze = ['phpmetrics --report-html=phpmetrics ./app'];
 
-    fs.unlink('composer.json');
+    fs.unlinkSync('composer.json');
 
     this.fs.write(
       this.destinationPath('composer.json'),
@@ -95,9 +95,9 @@ module.exports = class extends Generator {
   }
 
   removeFiles() {
-    fs.unlink('webpack.mix.js');
-    fs.unlink('package.json');
-    fs.unlink('.gitignore');
+    fs.unlinkSync('webpack.mix.js');
+    fs.unlinkSync('package.json');
+    fs.unlinkSync('.gitignore');
   }
 
   templates() {

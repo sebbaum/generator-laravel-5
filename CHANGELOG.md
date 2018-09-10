@@ -1,4 +1,8 @@
 # CHANGELOG
+
+## 1.2.0
+* Supporting nodejs 10
+
 ## 1.1.0
 * Added support for Laravel 5.7.*
 * Linking storage to public folder
