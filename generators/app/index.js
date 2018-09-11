@@ -25,7 +25,7 @@ module.exports = class extends Generator {
         type: 'list',
         name: 'proxy',
         message: 'From where do you serve your application during development?',
-        choices: ['php artisan serve (localhost:8080)', 'localhost'],
+        choices: ['php artisan serve (localhost:8000)', 'localhost'],
         default: 0
       },
       {
