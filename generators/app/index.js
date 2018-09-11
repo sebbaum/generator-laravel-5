@@ -103,7 +103,7 @@ module.exports = class extends Generator {
   templates() {
     let schema = this.answers.schema || 'http';
     let proxyHost =
-      this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8080';
+      this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8000';
     let proxy = schema + '://' + proxyHost;
 
     this.fs.copyTpl(
@@ -119,14 +119,20 @@ module.exports = class extends Generator {
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
   }
 
-  install() {
+  preset() {
     this.spawnCommandSync('php', ['artisan', 'preset', this.answers.preset]);
-    this.npmInstall(['browser-sync', 'browser-sync-webpack-plugin'], {
-      'save-dev': true
-    });
+  }
+
+  install() {
+    // Let packages = [];
+
+    // this.npmInstall(packages, {
+    //   'save-dev': true
+    // });
     this.installDependencies({
       bower: false,
-      yarn: false
+      yarn: false,
+      npm: true
     });
   }
 

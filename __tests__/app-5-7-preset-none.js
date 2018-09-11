@@ -39,13 +39,14 @@ describe('generator-laravel-5:app', () => {
   });
 
   it('packages.json contains npm packages', done => {
-    assert.noFileContent('package.json', /bootstrap/);
-    // Assert.fileContent('package.json', /bootstrap-sass/);
-    // assert.fileContent('package.json', 'browser-sync');
-    // assert.fileContent('package.json', /browser-sync-webpack-plugin/);
-    assert.fileContent('package.json', /cross-env/);
-    assert.fileContent('package.json', /laravel-mix/);
-    assert.fileContent('package.json', /lodash/);
+    assert.fileContent('package.json', 'bootstrap');
+    assert.fileContent('package.json', 'bootstrap-sass');
+    assert.fileContent('package.json', 'browser-sync');
+    assert.fileContent('package.json', 'browser-sync-webpack-plugin');
+    assert.fileContent('package.json', 'cross-env');
+    assert.fileContent('package.json', 'laravel-mix');
+    assert.fileContent('package.json', 'lodash');
+    assert.fileContent('package.json', 'popper.js');
 
     done();
   });
