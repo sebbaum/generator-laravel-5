@@ -94,6 +94,10 @@ module.exports = class extends Generator {
     );
   }
 
+  preset() {
+    this.spawnCommandSync('php', ['artisan', 'preset', this.answers.preset]);
+  }
+
   removeFiles() {
     fs.unlinkSync('webpack.mix.js');
     fs.unlinkSync('package.json');
@@ -106,29 +110,31 @@ module.exports = class extends Generator {
       this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8000';
     let proxy = schema + '://' + proxyHost;
 
+    let resourcesPath =
+      this.answers.version === '5.7.*' ? 'resources' : 'resources/assets';
     this.fs.copyTpl(
       this.templatePath('webpack.mix.ejs'),
       this.destinationPath('webpack.mix.js'),
       {
         version: this.answers.version,
-        proxy: proxy
+        preset: this.answers.preset,
+        proxy: proxy,
+        resourcesPath: resourcesPath
       }
     );
 
-    this.fs.copy(this.templatePath('package.json'), this.destinationPath('package.json'));
+    this.fs.copyTpl(
+      this.templatePath('package.ejs'),
+      this.destinationPath('package.json'),
+      {
+        preset: this.answers.preset
+      }
+    );
+
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
   }
 
-  preset() {
-    this.spawnCommandSync('php', ['artisan', 'preset', this.answers.preset]);
-  }
-
   install() {
-    // Let packages = [];
-
-    // this.npmInstall(packages, {
-    //   'save-dev': true
-    // });
     this.installDependencies({
       bower: false,
       yarn: false,
