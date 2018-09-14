@@ -37,4 +37,28 @@ describe('generator-laravel-5:app', () => {
 
     done();
   });
+
+  it('webpack.mix.js is configured correctly', done => {
+    assert.fileContent(
+      'webpack.mix.js',
+      "mix.js('resources/assets/js/app.js', 'public/js');"
+    );
+    assert.fileContent(
+      'webpack.mix.js',
+      "mix.sass('resources/assets/sass/app.scss', 'public/css');"
+    );
+    assert.fileContent(
+      'webpack.mix.js',
+      'mix.browserSync({\n' +
+        "  proxy: 'http://localhost',\n" +
+        "  host: 'localhost',\n" +
+        '  open: false,\n' +
+        '  watchOptions: {\n' +
+        '    usePolling: true\n' +
+        '  }\n' +
+        '});'
+    );
+
+    done();
+  });
 });
