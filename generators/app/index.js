@@ -44,6 +44,12 @@ module.exports = class extends Generator {
         message: 'Which laravel frontend preset do you want to use?',
         choices: ['none', 'bootstrap', 'vue', 'react'],
         default: 'none'
+      },
+      {
+        type: 'confirm',
+        name: 'enableAuth',
+        message: "Do you want to create Laravel's auth layer?",
+        default: false
       }
     ];
 
@@ -145,6 +151,9 @@ module.exports = class extends Generator {
   end() {
     if (this.answers.preset !== 'none') {
       this.spawnCommandSync('npm', ['run', 'dev']);
+    }
+    if (this.answers.enableAuth) {
+      this.spawnCommandSync('php', ['artisan', 'make:auth']);
     }
 
     this.spawnCommandSync('php', ['artisan', 'storage:link']);
