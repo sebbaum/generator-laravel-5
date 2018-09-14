@@ -12,7 +12,8 @@ describe('generator-laravel-5:app', () => {
         version: '5.7.*',
         proxy: 'localhost',
         schema: 'http',
-        preset: 'none'
+        preset: 'none',
+        enableAuth: false
       })
       .on('end', done);
   }, 1200000);
@@ -34,6 +35,27 @@ describe('generator-laravel-5:app', () => {
         analyze: ['phpmetrics --report-html=phpmetrics ./app']
       }
     });
+
+    done();
+  });
+
+  it('webpack.mix.js is configured correctly', done => {
+    assert.fileContent('webpack.mix.js', "mix.js('resources/js/app.js', 'public/js');");
+    assert.fileContent(
+      'webpack.mix.js',
+      "mix.sass('resources/sass/app.scss', 'public/css');"
+    );
+    assert.fileContent(
+      'webpack.mix.js',
+      'mix.browserSync({\n' +
+        "  proxy: 'http://localhost',\n" +
+        "  host: 'localhost',\n" +
+        '  open: false,\n' +
+        '  watchOptions: {\n' +
+        '    usePolling: true\n' +
+        '  }\n' +
+        '});'
+    );
 
     done();
   });
