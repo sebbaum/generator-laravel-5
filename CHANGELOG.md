@@ -1,5 +1,7 @@
 # CHANGELOG
 
+## 1.4.0
+
 ## 1.3.0
 * Fixed missing NPM dependencies in the context of frontend presets
 * Fixed the php artisan serve port in webpack.mix.js
