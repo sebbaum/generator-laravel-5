@@ -88,7 +88,6 @@ module.exports = class extends Generator {
 
   composerScripts() {
     let data = fs.readFileSync('composer.json', 'utf8');
-    console.log(data);
     let composer = JSON.parse(data);
     composer.scripts.analyze = ['phpmetrics --report-html=phpmetrics ./app'];
 
