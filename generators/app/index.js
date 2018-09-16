@@ -4,6 +4,10 @@ const chalk = require('chalk');
 const fs = require('fs');
 
 module.exports = class extends Generator {
+  /**
+   * Ask the developer some questions that will define the build result.
+   * @returns {Promise|*|PromiseLike<T | never>|Promise<T | never>}
+   */
   prompting() {
     this.log("Let's create a new " + chalk.blue('Laravel 5') + ' application');
 
@@ -59,6 +63,9 @@ module.exports = class extends Generator {
     });
   }
 
+  /**
+   * Given the appname and version let's create a new Laravel 5.* application
+   */
   installLaravel() {
     this.spawnCommandSync('composer', [
       'create-project',
@@ -69,10 +76,16 @@ module.exports = class extends Generator {
     ]);
   }
 
+  /**
+   * Define the destination root folder. This will be used in the following build steps.
+   */
   setApplicationFolder() {
     this.destinationRoot(this.destinationPath(this.answers.appname));
   }
 
+  /**
+   * Install some third party laravel packages that might be useful for your application.
+   */
   installLaravelPackages() {
     this.spawnCommandSync('composer', [
       'require',
@@ -86,6 +99,10 @@ module.exports = class extends Generator {
     ]);
   }
 
+  /**
+   * Add additional composer scripts to composer.json. Composer.json is deleted and then written
+   * with the new scripts definition.
+   */
   composerScripts() {
     let data = fs.readFileSync('composer.json', 'utf8');
     let composer = JSON.parse(data);
@@ -99,16 +116,28 @@ module.exports = class extends Generator {
     );
   }
 
+  /**
+   * Run `php artisan preset` with the given preset. This will prepare the frontend files and structure.
+   */
   preset() {
     this.spawnCommandSync('php', ['artisan', 'preset', this.answers.preset]);
   }
 
+  /**
+   * Remove certain files that will be created by the generator in the following build steps.
+   */
   removeFiles() {
     fs.unlinkSync('webpack.mix.js');
     fs.unlinkSync('package.json');
     fs.unlinkSync('.gitignore');
   }
 
+  /**
+   * Create new files from templates.
+   * - webpack.mix.ejs => webpack.mix.js
+   * - package.ejs => package.js
+   * - .gitignore => .gitignore
+   */
   templates() {
     let schema = this.answers.schema || 'http';
     let proxyHost =
@@ -139,6 +168,10 @@ module.exports = class extends Generator {
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
   }
 
+  /**
+   * Perform the frontend installation with NPM.
+   * Yarn and bower are disabled.
+   */
   install() {
     this.installDependencies({
       bower: false,
@@ -147,6 +180,10 @@ module.exports = class extends Generator {
     });
   }
 
+  /**
+   * Finish the build by running php artisan commands and npm scripts.
+   * After this step your new application is ready.
+   */
   end() {
     if (this.answers.preset !== 'none') {
       this.spawnCommandSync('npm', ['run', 'dev']);
