@@ -12,7 +12,8 @@ describe('generator-laravel-5:app', () => {
         version: '5.7.*',
         proxy: 'localhost',
         schema: 'http',
-        preset: 'vue'
+        preset: 'vue',
+        enableAuth: false
       })
       .on('end', done);
   }, 1200000);
