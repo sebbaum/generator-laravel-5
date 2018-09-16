@@ -54,6 +54,12 @@ module.exports = class extends Generator {
         name: 'enableAuth',
         message: "Do you want to create Laravel's auth layer?",
         default: false
+      },
+      {
+        type: 'confirm',
+        name: 'localGit',
+        message: 'Do you want to init a local git repository?',
+        default: true
       }
     ];
 
@@ -194,5 +200,14 @@ module.exports = class extends Generator {
 
     this.spawnCommandSync('php', ['artisan', 'storage:link']);
     this.spawnCommandSync('php', ['artisan', 'self-diagnosis']);
+    if (this.answers.localGit) {
+      this.spawnCommandSync('git', ['init']);
+      this.spawnCommandSync('git', ['add', '.']);
+      this.spawnCommandSync('git', [
+        'commit',
+        '-m',
+        'Initial commit by yeoman laravel-5 generator'
+      ]);
+    }
   }
 };
