@@ -13,7 +13,8 @@ describe('generator-laravel-5:app', () => {
         proxy: 'localhost',
         schema: 'http',
         preset: 'bootstrap',
-        enableAuth: false
+        enableAuth: false,
+        localGit: false
       })
       .on('end', done);
   }, 1200000);
