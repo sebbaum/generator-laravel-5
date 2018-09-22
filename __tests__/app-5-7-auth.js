@@ -9,11 +9,11 @@ describe('generator-laravel-5:app', () => {
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         appname: 'testapp',
-        version: '5.6.*',
+        version: '5.7.*',
         proxy: 'localhost',
         schema: 'http',
         preset: 'none',
-        enableAuth: false,
+        enableAuth: true,
         localGit: false
       })
       .on('end', done);
@@ -40,26 +40,17 @@ describe('generator-laravel-5:app', () => {
     done();
   });
 
-  it('webpack.mix.js is configured correctly', done => {
-    assert.fileContent(
-      'webpack.mix.js',
-      "mix.js('resources/assets/js/app.js', 'public/js');"
-    );
-    assert.fileContent(
-      'webpack.mix.js',
-      "mix.sass('resources/assets/sass/app.scss', 'public/css');"
-    );
-    assert.fileContent(
-      'webpack.mix.js',
-      'mix.browserSync({\n' +
-        "  proxy: 'http://localhost',\n" +
-        "  host: 'localhost',\n" +
-        '  open: false,\n' +
-        '  watchOptions: {\n' +
-        '    usePolling: true\n' +
-        '  }\n' +
-        '});'
-    );
+  it('creates laravel auth layer files', done => {
+    assert.file([
+      'app/Http/Controllers/HomeController.php',
+      'resources/views/auth/passwords/email.blade.php',
+      'resources/views/auth/passwords/reset.blade.php',
+      'resources/views/auth/login.blade.php',
+      'resources/views/auth/register.blade.php',
+      'resources/views/auth/verify.blade.php',
+      'resources/views/home.blade.php',
+      'resources/views/layouts/app.blade.php'
+    ]);
 
     done();
   });

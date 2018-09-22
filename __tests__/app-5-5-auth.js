@@ -9,11 +9,11 @@ describe('generator-laravel-5:app', () => {
       .run(path.join(__dirname, '../generators/app'))
       .withPrompts({
         appname: 'testapp',
-        version: '5.7.*',
+        version: '5.5.*',
         proxy: 'localhost',
         schema: 'http',
-        preset: 'react',
-        enableAuth: false,
+        preset: 'none',
+        enableAuth: true,
         localGit: false
       })
       .on('end', done);
@@ -40,31 +40,14 @@ describe('generator-laravel-5:app', () => {
     done();
   });
 
-  it('packages.json contains npm packages', done => {
-    assert.fileContent('package.json', 'axios');
-    assert.fileContent('package.json', 'bootstrap');
-    assert.fileContent('package.json', 'bootstrap-sass');
-    assert.fileContent('package.json', 'browser-sync');
-    assert.fileContent('package.json', 'browser-sync-webpack-plugin');
-    assert.fileContent('package.json', 'cross-env');
-    assert.fileContent('package.json', 'jquery');
-    assert.fileContent('package.json', 'laravel-mix');
-    assert.fileContent('package.json', 'lodash');
-    assert.fileContent('package.json', 'react');
-    assert.fileContent('package.json', 'react-dom');
-    assert.fileContent('package.json', 'popper.js');
-
-    done();
-  });
-
-  it('webpack.mix.js is calling mix.react', done => {
+  it('webpack.mix.js is configured correctly', done => {
     assert.fileContent(
       'webpack.mix.js',
-      "mix.react('resources/js/app.js', 'public/js');"
+      "mix.js('resources/assets/js/app.js', 'public/js');"
     );
     assert.fileContent(
       'webpack.mix.js',
-      "mix.sass('resources/sass/app.scss', 'public/css');"
+      "mix.sass('resources/assets/sass/app.scss', 'public/css');"
     );
     assert.fileContent(
       'webpack.mix.js',
@@ -77,6 +60,20 @@ describe('generator-laravel-5:app', () => {
         '  }\n' +
         '});'
     );
+
+    done();
+  });
+
+  it('creates laravel auth layer files', done => {
+    assert.file([
+      'app/Http/Controllers/HomeController.php',
+      'resources/views/auth/passwords/email.blade.php',
+      'resources/views/auth/passwords/reset.blade.php',
+      'resources/views/auth/login.blade.php',
+      'resources/views/auth/register.blade.php',
+      'resources/views/home.blade.php',
+      'resources/views/layouts/app.blade.php'
+    ]);
 
     done();
   });

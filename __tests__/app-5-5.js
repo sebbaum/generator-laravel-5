@@ -12,7 +12,9 @@ describe('generator-laravel-5:app', () => {
         version: '5.5.*',
         proxy: 'localhost',
         schema: 'http',
-        preset: 'none'
+        preset: 'none',
+        enableAuth: false,
+        localGit: false
       })
       .on('end', done);
   }, 1200000);
