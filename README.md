@@ -46,6 +46,11 @@ this first before you can start watching your files with browserSync.
 In order to have webpack watch your file changes and reload your browser, run `npm run watch`.
 You have to open your browser an navigate to `http:localhost:3000`
 
+## Git versioning
+If you want to, you can initialize a local git repository to version your code.
+This is turned on by default. After scaffolding your new laravel application there is an initial
+commit in your local repository.
+
 ## License
 
 Apache-2.0 © [Sebastian Baum](http://www.sebbaum.de)

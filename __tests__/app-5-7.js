@@ -13,13 +13,14 @@ describe('generator-laravel-5:app', () => {
         proxy: 'localhost',
         schema: 'http',
         preset: 'none',
-        enableAuth: false
+        enableAuth: false,
+        localGit: true
       })
       .on('end', done);
   }, 1200000);
 
   it('creates files', done => {
-    assert.file(['webpack.mix.js', 'package.json', '.gitignore']);
+    assert.file(['webpack.mix.js', 'package.json', '.gitignore', '.git/config']);
     done();
   });
 

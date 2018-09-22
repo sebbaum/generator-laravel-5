@@ -1,6 +1,9 @@
 # CHANGELOG
 
 ## 1.4.0
+* Optional initialization of a local git repository.
+* Optimized documentation and code comments.
+* Optional integration of Laravel's auth layer.
 
 ## 1.3.0
 * Fixed missing NPM dependencies in the context of frontend presets
