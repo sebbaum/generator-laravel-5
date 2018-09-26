@@ -1,4 +1,18 @@
 # CHANGELOG
+
+## 1.4.0
+* Optional initialization of a local git repository.
+* Optimized documentation and code comments.
+* Optional integration of Laravel's auth layer.
+
+## 1.3.0
+* Fixed missing NPM dependencies in the context of frontend presets
+* Fixed the php artisan serve port in webpack.mix.js
+* Added more automated tests
+
+## 1.2.0
+* Supporting nodejs 10
+
 ## 1.1.0
 * Added support for Laravel 5.7.*
 * Linking storage to public folder

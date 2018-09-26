@@ -4,6 +4,10 @@ const chalk = require('chalk');
 const fs = require('fs');
 
 module.exports = class extends Generator {
+  /**
+   * Ask the developer some questions that will define the build result.
+   * @returns {Promise|*|PromiseLike<T | never>|Promise<T | never>}
+   */
   prompting() {
     this.log("Let's create a new " + chalk.blue('Laravel 5') + ' application');
 
@@ -25,7 +29,7 @@ module.exports = class extends Generator {
         type: 'list',
         name: 'proxy',
         message: 'From where do you serve your application during development?',
-        choices: ['php artisan serve (localhost:8080)', 'localhost'],
+        choices: ['php artisan serve (localhost:8000)', 'localhost'],
         default: 0
       },
       {
@@ -44,6 +48,18 @@ module.exports = class extends Generator {
         message: 'Which laravel frontend preset do you want to use?',
         choices: ['none', 'bootstrap', 'vue', 'react'],
         default: 'none'
+      },
+      {
+        type: 'confirm',
+        name: 'enableAuth',
+        message: "Do you want to create Laravel's auth layer?",
+        default: false
+      },
+      {
+        type: 'confirm',
+        name: 'localGit',
+        message: 'Do you want to init a local git repository?',
+        default: true
       }
     ];
 
@@ -53,6 +69,9 @@ module.exports = class extends Generator {
     });
   }
 
+  /**
+   * Given the appname and version let's create a new Laravel 5.* application
+   */
   installLaravel() {
     this.spawnCommandSync('composer', [
       'create-project',
@@ -63,10 +82,16 @@ module.exports = class extends Generator {
     ]);
   }
 
+  /**
+   * Define the destination root folder. This will be used in the following build steps.
+   */
   setApplicationFolder() {
     this.destinationRoot(this.destinationPath(this.answers.appname));
   }
 
+  /**
+   * Install some third party laravel packages that might be useful for your application.
+   */
   installLaravelPackages() {
     this.spawnCommandSync('composer', [
       'require',
@@ -80,13 +105,16 @@ module.exports = class extends Generator {
     ]);
   }
 
+  /**
+   * Add additional composer scripts to composer.json. Composer.json is deleted and then written
+   * with the new scripts definition.
+   */
   composerScripts() {
     let data = fs.readFileSync('composer.json', 'utf8');
-    console.log(data);
     let composer = JSON.parse(data);
     composer.scripts.analyze = ['phpmetrics --report-html=phpmetrics ./app'];
 
-    fs.unlink('composer.json');
+    fs.unlinkSync('composer.json');
 
     this.fs.write(
       this.destinationPath('composer.json'),
@@ -94,48 +122,92 @@ module.exports = class extends Generator {
     );
   }
 
-  removeFiles() {
-    fs.unlink('webpack.mix.js');
-    fs.unlink('package.json');
-    fs.unlink('.gitignore');
+  /**
+   * Run `php artisan preset` with the given preset. This will prepare the frontend files and structure.
+   */
+  preset() {
+    this.spawnCommandSync('php', ['artisan', 'preset', this.answers.preset]);
   }
 
+  /**
+   * Remove certain files that will be created by the generator in the following build steps.
+   */
+  removeFiles() {
+    fs.unlinkSync('webpack.mix.js');
+    fs.unlinkSync('package.json');
+    fs.unlinkSync('.gitignore');
+  }
+
+  /**
+   * Create new files from templates.
+   * - webpack.mix.ejs => webpack.mix.js
+   * - package.ejs => package.js
+   * - .gitignore => .gitignore
+   */
   templates() {
     let schema = this.answers.schema || 'http';
     let proxyHost =
-      this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8080';
+      this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8000';
     let proxy = schema + '://' + proxyHost;
 
+    let resourcesPath =
+      this.answers.version === '5.7.*' ? 'resources' : 'resources/assets';
     this.fs.copyTpl(
       this.templatePath('webpack.mix.ejs'),
       this.destinationPath('webpack.mix.js'),
       {
         version: this.answers.version,
-        proxy: proxy
+        preset: this.answers.preset,
+        proxy: proxy,
+        resourcesPath: resourcesPath
       }
     );
 
-    this.fs.copy(this.templatePath('package.json'), this.destinationPath('package.json'));
+    this.fs.copyTpl(
+      this.templatePath('package.ejs'),
+      this.destinationPath('package.json'),
+      {
+        preset: this.answers.preset
+      }
+    );
+
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
   }
 
+  /**
+   * Perform the frontend installation with NPM.
+   * Yarn and bower are disabled.
+   */
   install() {
-    this.spawnCommandSync('php', ['artisan', 'preset', this.answers.preset]);
-    this.npmInstall(['browser-sync', 'browser-sync-webpack-plugin'], {
-      'save-dev': true
-    });
     this.installDependencies({
       bower: false,
-      yarn: false
+      yarn: false,
+      npm: true
     });
   }
 
+  /**
+   * Finish the build by running php artisan commands and npm scripts.
+   * After this step your new application is ready.
+   */
   end() {
     if (this.answers.preset !== 'none') {
       this.spawnCommandSync('npm', ['run', 'dev']);
     }
+    if (this.answers.enableAuth) {
+      this.spawnCommandSync('php', ['artisan', 'make:auth']);
+    }
 
     this.spawnCommandSync('php', ['artisan', 'storage:link']);
     this.spawnCommandSync('php', ['artisan', 'self-diagnosis']);
+    if (this.answers.localGit) {
+      this.spawnCommandSync('git', ['init']);
+      this.spawnCommandSync('git', ['add', '.']);
+      this.spawnCommandSync('git', [
+        'commit',
+        '-m',
+        'Initial commit by yeoman laravel-5 generator'
+      ]);
+    }
   }
 };
