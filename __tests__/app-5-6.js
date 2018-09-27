@@ -24,7 +24,6 @@ describe('generator-laravel-5:app', () => {
       'webpack.mix.js',
       'package.json',
       '.gitignore',
-      '.git/config',
       '.phpstorm.meta.php',
       '_ide_helper.php'
     ]);
