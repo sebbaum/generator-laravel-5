@@ -25,7 +25,8 @@ describe('generator-laravel-5:app', () => {
       'package.json',
       '.gitignore',
       '.phpstorm.meta.php',
-      '_ide_helper.php'
+      '_ide_helper.php',
+      'database/database.sqlite'
     ]);
     done();
   });

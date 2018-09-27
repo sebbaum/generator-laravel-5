@@ -145,6 +145,7 @@ module.exports = class extends Generator {
    * - .gitignore => .gitignore
    */
   templates() {
+    this.fs.write(this.destinationPath('database/database.sqlite'), '');
     let schema = this.answers.schema || 'http';
     let proxyHost =
       this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8000';
