@@ -101,7 +101,8 @@ module.exports = class extends Generator {
       'barryvdh/laravel-debugbar',
       'barryvdh/laravel-cors',
       'phpmetrics/phpmetrics',
-      'beyondcode/laravel-self-diagnosis'
+      'beyondcode/laravel-self-diagnosis',
+      'symplify/easy-coding-standard'
     ]);
   }
 
@@ -173,6 +174,10 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
+    this.fs.copy(
+      this.templatePath('easy-coding-standard.yml'),
+      this.destinationPath('easy-coding-standard.yml')
+    );
   }
 
   /**

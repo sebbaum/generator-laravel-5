@@ -26,7 +26,8 @@ describe('generator-laravel-5:app', () => {
       '.gitignore',
       '.phpstorm.meta.php',
       '_ide_helper.php',
-      'database/database.sqlite'
+      'database/database.sqlite',
+      'easy-coding-standard.yml'
     ]);
     done();
   });
@@ -38,6 +39,7 @@ describe('generator-laravel-5:app', () => {
     assert.fileContent('composer.json', 'barryvdh/laravel-cors');
     assert.fileContent('composer.json', 'phpmetrics/phpmetrics');
     assert.fileContent('composer.json', 'beyondcode/laravel-self-diagnosis');
+    assert.fileContent('composer.json', 'symplify/easy-coding-standard');
     assert.jsonFileContent('composer.json', {
       scripts: {
         analyze: ['phpmetrics --report-html=phpmetrics ./app']
