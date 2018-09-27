@@ -199,7 +199,8 @@ module.exports = class extends Generator {
     }
 
     this.spawnCommandSync('php', ['artisan', 'storage:link']);
-    this.spawnCommandSync('php', ['artisan', 'self-diagnosis']);
+    this.spawnCommandSync('php', ['artisan', 'ide-helper:generate']);
+    this.spawnCommandSync('php', ['artisan', 'ide-helper:meta']);
     if (this.answers.localGit) {
       this.spawnCommandSync('git', ['init']);
       this.spawnCommandSync('git', ['add', '.']);
@@ -209,5 +210,6 @@ module.exports = class extends Generator {
         'Initial commit by yeoman laravel-5 generator'
       ]);
     }
+    this.spawnCommandSync('php', ['artisan', 'self-diagnosis']);
   }
 };

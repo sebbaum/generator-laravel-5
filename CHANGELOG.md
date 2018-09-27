@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.5.0
+* Generating ide-helper files.
+
 ## 1.4.0
 * Optional initialization of a local git repository.
 * Optimized documentation and code comments.

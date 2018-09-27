@@ -20,7 +20,14 @@ describe('generator-laravel-5:app', () => {
   }, 1200000);
 
   it('creates files', done => {
-    assert.file(['webpack.mix.js', 'package.json', '.gitignore', '.git/config']);
+    assert.file([
+      'webpack.mix.js',
+      'package.json',
+      '.gitignore',
+      '.git/config',
+      '.phpstorm.meta.php',
+      '_ide_helper.php'
+    ]);
     done();
   });
 
