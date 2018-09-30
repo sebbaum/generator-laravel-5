@@ -101,7 +101,8 @@ module.exports = class extends Generator {
       'barryvdh/laravel-debugbar',
       'barryvdh/laravel-cors',
       'phpmetrics/phpmetrics',
-      'beyondcode/laravel-self-diagnosis'
+      'beyondcode/laravel-self-diagnosis',
+      'symplify/easy-coding-standard'
     ]);
   }
 
@@ -113,6 +114,8 @@ module.exports = class extends Generator {
     let data = fs.readFileSync('composer.json', 'utf8');
     let composer = JSON.parse(data);
     composer.scripts.analyze = ['phpmetrics --report-html=phpmetrics ./app'];
+    composer.scripts.ecsCheck = ['vendor/bin/ecs check .'];
+    composer.scripts.ecsFix = ['vendor/bin/ecs check . --fix'];
 
     fs.unlinkSync('composer.json');
 
@@ -145,6 +148,7 @@ module.exports = class extends Generator {
    * - .gitignore => .gitignore
    */
   templates() {
+    this.fs.write(this.destinationPath('database/database.sqlite'), '');
     let schema = this.answers.schema || 'http';
     let proxyHost =
       this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8000';
@@ -172,6 +176,10 @@ module.exports = class extends Generator {
     );
 
     this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
+    this.fs.copy(
+      this.templatePath('easy-coding-standard.yml'),
+      this.destinationPath('easy-coding-standard.yml')
+    );
   }
 
   /**
@@ -199,7 +207,8 @@ module.exports = class extends Generator {
     }
 
     this.spawnCommandSync('php', ['artisan', 'storage:link']);
-    this.spawnCommandSync('php', ['artisan', 'self-diagnosis']);
+    this.spawnCommandSync('php', ['artisan', 'ide-helper:generate']);
+    this.spawnCommandSync('php', ['artisan', 'ide-helper:meta']);
     if (this.answers.localGit) {
       this.spawnCommandSync('git', ['init']);
       this.spawnCommandSync('git', ['add', '.']);
@@ -209,5 +218,6 @@ module.exports = class extends Generator {
         'Initial commit by yeoman laravel-5 generator'
       ]);
     }
+    this.spawnCommandSync('php', ['artisan', 'self-diagnosis']);
   }
 };

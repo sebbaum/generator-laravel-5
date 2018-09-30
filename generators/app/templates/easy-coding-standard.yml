@@ -1,0 +1,9 @@
+imports:
+  - { resource: 'vendor/symplify/easy-coding-standard/config/clean-code.yml' }
+  - { resource: 'vendor/symplify/easy-coding-standard/config/psr2.yml' }
+parameters:
+  exclude_files:
+  - '.phpstorm.meta.php'
+  - '_ide_helper.php'
+  - 'bootstrap/cache/*.php'
+  - 'vendor/**/*.php'
