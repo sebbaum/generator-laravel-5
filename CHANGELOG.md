@@ -2,6 +2,7 @@
 
 ## 1.5.0
 * Generating ide-helper files.
+* Creating a `database.sqlite` file in the database folder.
 * Integrated [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard) to check and fix the code style.
 
 ## 1.4.0
