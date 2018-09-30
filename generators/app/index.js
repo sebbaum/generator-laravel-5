@@ -114,6 +114,8 @@ module.exports = class extends Generator {
     let data = fs.readFileSync('composer.json', 'utf8');
     let composer = JSON.parse(data);
     composer.scripts.analyze = ['phpmetrics --report-html=phpmetrics ./app'];
+    composer.scripts.ecsCheck = ['vendor/bin/ecs check .'];
+    composer.scripts.ecsFix = ['vendor/bin/ecs check . --fix'];
 
     fs.unlinkSync('composer.json');
 

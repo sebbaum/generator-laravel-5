@@ -6,5 +6,4 @@ parameters:
   - '.phpstorm.meta.php'
   - '_ide_helper.php'
   - 'bootstrap/cache/*.php'
-  # TODO add more here, add composer and add config
   - 'vendor/**/*.php'

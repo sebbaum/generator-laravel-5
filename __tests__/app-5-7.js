@@ -43,7 +43,9 @@ describe('generator-laravel-5:app', () => {
     assert.fileContent('composer.json', 'symplify/easy-coding-standard');
     assert.jsonFileContent('composer.json', {
       scripts: {
-        analyze: ['phpmetrics --report-html=phpmetrics ./app']
+        analyze: ['phpmetrics --report-html=phpmetrics ./app'],
+        ecsCheck: ['vendor/bin/ecs check .'],
+        ecsFix: ['vendor/bin/ecs check . --fix']
       }
     });
 
