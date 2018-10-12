@@ -30,14 +30,33 @@ The following packages are integrated in the new Laravel project by default:
 * barryvdh/laravel-cors
 * phpmetrics/phpmetrics
 * beyondcode/laravel-self-diagnosis
+* symplify/easy-coding-standard
 
-## Code analyzes
+## phpmetrics analyzes
 In order to perform a code analyzes with phpmetrics you can run:
 ```
 composer run-script analyze
 ```
 This will create a folder named `phpmetrics` and you can get interesting insights by opening
 `phpmetrics/index.html`
+
+## Code style check und fixing
+In order to have a clean and shiny code style, your generated Laravel 5 application comes with 
+[EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard) support.  
+You can check your code with the following command: `composer run-script ecsCheck`
+This checks the whole project and applies some basic check configurations.
+You can tweak the check configuration in the `easy-coding-standard.yml` file.
+
+In order to fix your code style, you can run `composer run-script ecsFix`.
+
+You can also run eaysCodingStandard and pass other configuration by calling the tool directly:
+```
+vendor/bin/ecs check app --config vendor/symplify/easy-coding-standard/config/clean-code.yml
+vendor/bin/ecs check app --config vendor/symplify/easy-coding-standard/config/clean-code.yml --fix
+```
+
+For more information, please consult the official 
+[documentation](https://github.com/Symplify/EasyCodingStandard/blob/master/README.md).
 
 ## Frontend development with browserSync
 If you serve your application with `php artisan serve` (http://localhost:8000) you have to start

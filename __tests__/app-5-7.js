@@ -20,7 +20,16 @@ describe('generator-laravel-5:app', () => {
   }, 1200000);
 
   it('creates files', done => {
-    assert.file(['webpack.mix.js', 'package.json', '.gitignore', '.git/config']);
+    assert.file([
+      'webpack.mix.js',
+      'package.json',
+      '.gitignore',
+      '.git/config',
+      // '.phpstorm.meta.php',
+      // '_ide_helper.php',
+      'database/database.sqlite',
+      'easy-coding-standard.yml'
+    ]);
     done();
   });
 
@@ -31,9 +40,12 @@ describe('generator-laravel-5:app', () => {
     assert.fileContent('composer.json', 'barryvdh/laravel-cors');
     assert.fileContent('composer.json', 'phpmetrics/phpmetrics');
     assert.fileContent('composer.json', 'beyondcode/laravel-self-diagnosis');
+    assert.fileContent('composer.json', 'symplify/easy-coding-standard');
     assert.jsonFileContent('composer.json', {
       scripts: {
-        analyze: ['phpmetrics --report-html=phpmetrics ./app']
+        analyze: ['phpmetrics --report-html=phpmetrics ./app'],
+        ecsCheck: ['vendor/bin/ecs check .'],
+        ecsFix: ['vendor/bin/ecs check . --fix']
       }
     });
 
