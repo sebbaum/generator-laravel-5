@@ -1,5 +1,5 @@
 # generator-laravel-5 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Installs Laravel-5 and enables BrowserSync
+> Installs Laravel-5 with a bunch of useful packages and enables BrowserSync
 
 ## Installation
 
@@ -40,7 +40,7 @@ composer run-script analyze
 This will create a folder named `phpmetrics` and you can get interesting insights by opening
 `phpmetrics/index.html`
 
-## Code style check und fixing
+## Code style check and fixing
 In order to have a clean and shiny code style, your generated Laravel 5 application comes with 
 [EasyCodingStandard](https://github.com/Symplify/EasyCodingStandard) support.  
 You can check your code with the following command: `composer run-script ecsCheck`
@@ -49,7 +49,7 @@ You can tweak the check configuration in the `easy-coding-standard.yml` file.
 
 In order to fix your code style, you can run `composer run-script ecsFix`.
 
-You can also run eaysCodingStandard and pass other configuration by calling the tool directly:
+You can also run easyCodingStandard and pass other configuration by calling the tool directly:
 ```
 vendor/bin/ecs check app --config vendor/symplify/easy-coding-standard/config/clean-code.yml
 vendor/bin/ecs check app --config vendor/symplify/easy-coding-standard/config/clean-code.yml --fix
@@ -57,6 +57,16 @@ vendor/bin/ecs check app --config vendor/symplify/easy-coding-standard/config/cl
 
 For more information, please consult the official 
 [documentation](https://github.com/Symplify/EasyCodingStandard/blob/master/README.md).
+
+## phpunit-watcher
+Another useful php package that is integrated out of the box is spatie/phpunit-watcher. With this tool, 
+you can watch changes in *.php and test files and all your automated tests will be triggered to run.
+You can start phpunit-watcher with:
+```bash
+vendor/bin/phpunit-watcher watch
+```
+For more information have a look at the official documentation:
+https://github.com/spatie/phpunit-watcher
 
 ## Frontend development with browserSync
 If you serve your application with `php artisan serve` (http://localhost:8000) you have to start
@@ -73,7 +83,6 @@ commit in your local repository.
 ## License
 
 Apache-2.0 © [Sebastian Baum](http://www.sebbaum.de)
-
 
 [npm-image]: https://badge.fury.io/js/generator-laravel-5.svg
 [npm-url]: https://npmjs.org/package/generator-laravel-5

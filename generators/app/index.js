@@ -102,7 +102,8 @@ module.exports = class extends Generator {
       'barryvdh/laravel-cors',
       'phpmetrics/phpmetrics',
       'beyondcode/laravel-self-diagnosis',
-      'symplify/easy-coding-standard'
+      'symplify/easy-coding-standard',
+      'spatie/phpunit-watcher'
     ]);
   }
 
