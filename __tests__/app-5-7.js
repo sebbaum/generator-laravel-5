@@ -41,6 +41,7 @@ describe('generator-laravel-5:app', () => {
     assert.fileContent('composer.json', 'phpmetrics/phpmetrics');
     assert.fileContent('composer.json', 'beyondcode/laravel-self-diagnosis');
     assert.fileContent('composer.json', 'symplify/easy-coding-standard');
+    assert.fileContent('composer.json', 'spatie/phpunit-watcher');
     assert.jsonFileContent('composer.json', {
       scripts: {
         analyze: ['phpmetrics --report-html=phpmetrics ./app'],
