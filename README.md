@@ -26,16 +26,23 @@ The proxy configuration is required for BrowserSync and can be changed in `webpa
 The following packages are integrated in the new Laravel project by default:
 * doctrine/dbal
 * barryvdh/laravel-ide-helper
-* barryvdh/laravel-debugbar
+* barryvdh/laravel-debugbar (for Laravel <= 5.6.*)
 * barryvdh/laravel-cors
 * phpmetrics/phpmetrics
 * beyondcode/laravel-self-diagnosis
+* laravel/telescope (for Laravel >= 5.7.*)
 * symplify/easy-coding-standard
+
+## Laravel Telescope
+Laravel Telescope is integrated for Laravel 5.7+ applications. Make sure to run the migration manually,
+after having prepared and configured your database.  
+Laravel Telescope runs with the default configuration. Only `php artisan telescope:install` has been executed
+during the setup routine. You can open the telescope GUI via: `http(s)://your-domain/telescope`.
 
 ## phpmetrics analyzes
 In order to perform a code analyzes with phpmetrics you can run:
 ```
-composer run-script analyze
+composer analyze
 ```
 This will create a folder named `phpmetrics` and you can get interesting insights by opening
 `phpmetrics/index.html`

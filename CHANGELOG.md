@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 1.7.0
+* Integrated laravel/telescope for Laravel 5.7+ applications
+
 ## 1.6.0
 * Integrated spatie/phpunit-watcher
 
