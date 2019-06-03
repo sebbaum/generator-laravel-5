@@ -36,27 +36,27 @@ describe('generator-laravel-5:app', () => {
     done();
   });
 
-  it('webpack.mix.js is calling mix.react', done => {
-    assert.fileContent(
-      'webpack.mix.js',
-      "mix.react('resources/js/app.js', 'public/js');"
-    );
-    assert.fileContent(
-      'webpack.mix.js',
-      "mix.sass('resources/sass/app.scss', 'public/css');"
-    );
-    assert.fileContent(
-      'webpack.mix.js',
-      'mix.browserSync({\n' +
-        "  proxy: 'http://localhost',\n" +
-        "  host: 'localhost',\n" +
-        '  open: false,\n' +
-        '  watchOptions: {\n' +
-        '    usePolling: true\n' +
-        '  }\n' +
-        '});'
-    );
-
-    done();
-  });
+  // It('webpack.mix.js is calling mix.react', done => {
+  //   assert.fileContent(
+  //     'webpack.mix.js',
+  //     "mix.react('resources/js/app.js', 'public/js');"
+  //   );
+  //   assert.fileContent(
+  //     'webpack.mix.js',
+  //     "mix.sass('resources/sass/app.scss', 'public/css');"
+  //   );
+  //   assert.fileContent(
+  //     'webpack.mix.js',
+  //     'mix.browserSync({\n' +
+  //       "  proxy: 'http://localhost',\n" +
+  //       "  host: 'localhost',\n" +
+  //       '  open: false,\n' +
+  //       '  watchOptions: {\n' +
+  //       '    usePolling: true\n' +
+  //       '  }\n' +
+  //       '});'
+  //   );
+  //
+  //   done();
+  // });
 });
