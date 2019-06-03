@@ -93,17 +93,23 @@ module.exports = class extends Generator {
    * Install some third party laravel packages that might be useful for your application.
    */
   installLaravelPackages() {
-    this.spawnCommandSync('composer', [
+    let composerDevPackages = [
       'require',
       '--dev',
       'doctrine/dbal',
       'barryvdh/laravel-ide-helper',
-      'barryvdh/laravel-debugbar',
       'barryvdh/laravel-cors',
       'phpmetrics/phpmetrics',
       'beyondcode/laravel-self-diagnosis',
-      'symplify/easy-coding-standard'
-    ]);
+      'symplify/easy-coding-standard',
+      'spatie/phpunit-watcher'
+    ];
+    if (this.answers.version === '5.7.*') {
+      composerDevPackages.push('laravel/telescope');
+    } else {
+      composerDevPackages.push('barryvdh/laravel-debugbar');
+    }
+    this.spawnCommandSync('composer', composerDevPackages);
   }
 
   /**
@@ -209,6 +215,9 @@ module.exports = class extends Generator {
     this.spawnCommandSync('php', ['artisan', 'storage:link']);
     this.spawnCommandSync('php', ['artisan', 'ide-helper:generate']);
     this.spawnCommandSync('php', ['artisan', 'ide-helper:meta']);
+    if (this.answers.version === '5.7.*') {
+      this.spawnCommandSync('php', ['artisan', 'telescope:install']);
+    }
     if (this.answers.localGit) {
       this.spawnCommandSync('git', ['init']);
       this.spawnCommandSync('git', ['add', '.']);

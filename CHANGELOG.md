@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.7.0
+* Integrated laravel/telescope for Laravel 5.7+ applications
+
+## 1.6.0
+* Integrated spatie/phpunit-watcher
+
 ## 1.5.0
 * Generating ide-helper files.
 * Creating a `database.sqlite` file in the database folder.

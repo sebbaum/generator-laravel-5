@@ -36,11 +36,12 @@ describe('generator-laravel-5:app', () => {
   it('composer.json contains laravel packages and script', done => {
     assert.fileContent('composer.json', 'doctrine/dbal');
     assert.fileContent('composer.json', 'barryvdh/laravel-ide-helper');
-    assert.fileContent('composer.json', 'barryvdh/laravel-debugbar');
+    assert.fileContent('composer.json', 'laravel/telescope');
     assert.fileContent('composer.json', 'barryvdh/laravel-cors');
     assert.fileContent('composer.json', 'phpmetrics/phpmetrics');
     assert.fileContent('composer.json', 'beyondcode/laravel-self-diagnosis');
     assert.fileContent('composer.json', 'symplify/easy-coding-standard');
+    assert.fileContent('composer.json', 'spatie/phpunit-watcher');
     assert.jsonFileContent('composer.json', {
       scripts: {
         analyze: ['phpmetrics --report-html=phpmetrics ./app'],
