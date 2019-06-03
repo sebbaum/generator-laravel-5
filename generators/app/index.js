@@ -104,7 +104,7 @@ module.exports = class extends Generator {
       'symplify/easy-coding-standard',
       'spatie/phpunit-watcher'
     ];
-    if (this.answers.version === '5.7.*') {
+    if (this.answers.version === '5.8.*') {
       composerDevPackages.push('laravel/telescope');
     } else {
       composerDevPackages.push('barryvdh/laravel-debugbar');
