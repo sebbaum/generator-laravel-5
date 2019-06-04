@@ -160,8 +160,9 @@ module.exports = class extends Generator {
       this.answers.proxy === 'localhost' ? this.answers.proxy : 'localhost:8000';
     let proxy = schema + '://' + proxyHost;
 
-    let resourcesPath =
-      this.answers.version === '5.7.*' ? 'resources' : 'resources/assets';
+    let resourcesPath = ['5.8.*', '5.7.*'].includes(this.answers.version)
+      ? 'resources'
+      : 'resources/assets';
     this.fs.copyTpl(
       this.templatePath('webpack.mix.ejs'),
       this.destinationPath('webpack.mix.js'),
