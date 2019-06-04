@@ -22,7 +22,7 @@ module.exports = class extends Generator {
         type: 'list',
         name: 'version',
         message: 'Which Laravel version do you want to use?',
-        choices: ['5.7.*', '5.6.*', '5.5.*'],
+        choices: ['5.8.*', '5.7.*', '5.6.*', '5.5.*'],
         default: 0
       },
       {
